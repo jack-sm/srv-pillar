@@ -44,7 +44,15 @@ cons3rt:
   
   {%# CONS3RT infrastructure network information #%}
   infrastructure:
-    cons3rt-core-host:
+    salt-master:
+      ip:
+      hostname:
+      fqdn:
+    core-host:
+      ip:
+      hostname:
+      fqdn:
+    database-host:
       ip:
       hostname:
       fqdn:
