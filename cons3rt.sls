@@ -1,7 +1,7 @@
 {%# CONS3RT Pillar Values #%}
 cons3rt:
 
-  {%# Specific varaibles for otto initial configutation #%}
+  {%# Specific variables for otto initial configuration #%}
   otto:
     instance-name:
     instance-location:
@@ -73,3 +73,6 @@ cons3rt:
       hostname:
       fqdn:
 
+  {%#User and Group details#%}
+  uid: 500
+  gid: 500
