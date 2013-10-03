@@ -1,7 +1,9 @@
-{%# CONS3RT Pillar Values #%}
+# CONS3RT Pillar Values #
+#########################
 cons3rt:
 
-  {%# Specific variables for otto initial configuration #%}
+  # Specific variables for otto initial configuration #
+  #####################################################
   otto:
     instance-name:
     instance-location:
@@ -27,7 +29,8 @@ cons3rt:
     ui-cert: /etc/pki/tls/certs/www/server_nopass.pem
     ui-cert-key:
     
-  {%# File information used for CONS3RT #%}
+  # File information used for CONS3RT #
+  #####################################
   files:
     java:
       jre-infrastructure:
@@ -42,7 +45,8 @@ cons3rt:
       tarball:
       jackrabbit:
   
-  {%# CONS3RT infrastructure network information #%}
+  # CONS3RT infrastructure network information #
+  ##############################################
   infrastructure:
     salt-master:
       ip:
@@ -73,6 +77,7 @@ cons3rt:
       hostname:
       fqdn:
 
-  {%#User and Group details#%}
+  # User and Group details #
+  #########################
   uid: 500
   gid: 500
