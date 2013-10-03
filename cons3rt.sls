@@ -38,3 +38,30 @@ cons3rt:
         location:
       jre-suts:
         version:
+    tomcat:
+      tarball:
+      jackrabbit:
+  
+  {%# CONS3RT infrastructure network information #%}
+  infrastructure:
+    cons3rt-core-host:
+      ip:
+      hostname:
+      fqdn:
+    messaging-host:
+      ip:
+      hostname:
+      fqdn:
+    asset-db-host:
+      ip:
+      hostname:
+      fqdn:
+    testmanager-host:
+      ip:
+      hostname:
+      fqdn:
+    ui-host:
+      ip:
+      hostname:
+      fqdn:
+
