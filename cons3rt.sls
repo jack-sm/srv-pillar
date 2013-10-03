@@ -20,6 +20,12 @@ cons3rt:
     messaging-type:
     messaging-encrypted:
     messaging-user:
+    messaging-password:
+    messaging-port:
+    ui-auth-type:
+    ui-rest-port:
+    ui-cert: /etc/pki/tls/certs/www/server_nopass.pem
+    ui-cert-key:
     
   {%# File information used for CONS3RT #%}
   files:
