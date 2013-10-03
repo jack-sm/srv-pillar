@@ -32,18 +32,17 @@ cons3rt:
   # File information used for CONS3RT #
   #####################################
   files:
-    java:
-      jre-infrastructure:
-        version:
-        location:
-      jdk-infrastructure:
-        version:
-        location:
-      jre-suts:
-        version:
-    tomcat:
-      tarball:
-      jackrabbit:
+
+    #Java#
+    ######
+    jre-version      : 7-linux-x64
+    jre-location     : java/files/jre-7-linux-x64.tar.gz
+    jdk-version      : 7u40
+    jdk-location     : java/files/jdk-7u40-linux-x64.tar.gz
+    jre-suts-version : 
+
+    tomcat-tarball:
+    jackrabbit-tarball:
   
   # CONS3RT infrastructure network information #
   ##############################################
