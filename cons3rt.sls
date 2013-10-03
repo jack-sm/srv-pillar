@@ -3,7 +3,11 @@ cons3rt:
 
   {%# Specific varaibles for otto initial configutation #%}
   otto:
-    instance-name: 
+    instance-name:
+    instance-location:
+    instance-cloud:
+    instance-virtualization-service:
+    instance-ui-url:
     admin-pass:
     default-project:
     apps-root-directory:
@@ -16,6 +20,7 @@ cons3rt:
     messaging-type:
     messaging-encrypted:
     messaging-user:
+    
   {%# File information used for CONS3RT #%}
   files:
     java:
