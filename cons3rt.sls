@@ -46,7 +46,8 @@ cons3rt:
   
   # CONS3RT infrastructure network information #
   ##############################################
-  infrastructure:
+  infra:
+    network-domain: 
     salt-master:
       ip:
       hostname:
@@ -85,3 +86,6 @@ cons3rt:
   ########
   qpid:
     port:
+  # MySQL #
+  #########
+  mysql-admin-password : cons3rt # This will need to be the hashed password, else cons3rt logins to MySQL will fail.
