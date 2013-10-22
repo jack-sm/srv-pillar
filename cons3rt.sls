@@ -41,7 +41,8 @@ cons3rt:
     jdk-location     : java/files/jdk-7u40-linux-x64.tar.gz
     jre-suts-version : 
 
-    tomcat-tarball:
+    tomcat-tarball   : apache-tomcat-7.0.42
+    tomcat-version   : 7.0.42
     jackrabbit-tarball:
   
   # CONS3RT infrastructure network information #
