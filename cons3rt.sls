@@ -1,92 +1,117 @@
-# CONS3RT Pillar Values #
-#########################
-cons3rt:
+# CONS3RT System Configuration Manangement Data
+# ---------------------------------------------
+################################################################################
+#
+# All values needed for an installation and configuration management of a     
+# cons3rt deployment will be entered here. This pillar file can be copied
+# and renamed to accomadate multiple deployments.
+#
+##############################################################################
 
-  # Specific variables for otto initial configuration #
-  #####################################################
-  otto:
-    instance-name:
-    instance-location:
-    instance-cloud:
-    instance-virtualization-service:
-    instance-ui-url:
-    admin-pass:
-    default-project:
-    apps-root-directory:
-    email:
-    email-host:
-    email-tls: false
-    email-user:
-    jcr-id:
-    jcr-cert:
-    messaging-type:
-    messaging-encrypted:
-    messaging-user:
-    messaging-password:
-    messaging-port:
-    ui-auth-type:
-    ui-rest-port:
-    ui-cert: /etc/pki/tls/certs/www/server_nopass.pem
-    ui-cert-key:
-    
-  # File information used for CONS3RT #
-  #####################################
-  files:
+# CONS3RT Infrastructure
+# ----------------------
+cons3rt-infrastructure:
+  domain        : 
+  manage_dns    : False
+  dnsservers:
+                - 8.8.8.8
+                - 8.8.4.4
+  search_domain : example.com
+  manage_ntp    : False
+  ntpservers:
+                - 10.10.5.1
+                - 10.10.5.2
+  manage_network: False
+  gateway       : 
+  subnet        : 
+  hosts:
+    cons3rt:
+      hostname  : 
+      ip        : 
+    database:
+      hostname  : 
+      ip        : 
+    messaging:
+      hostname  : 
+      ip        : 
+    assetrepository:
+      hostname  : 
+      ip        : 
+    webinterface:
+      hostname  : 
+      ip        : 
+    sourcebuilder:
+      hostname  : 
+      ip        : 
+    testmanager:
+      hostname  : 
+      ip        : 
+    retina:
+      hostname  : 
+      ip        : 
 
-    #Java#
-    ######
-    jre-version      : 7-linux-x64
-    jre-location     : java/files/jre-7-linux-x64.tar.gz
-    jdk-version      : 7u40
-    jdk-location     : java/files/jdk-7u40-linux-x64.tar.gz
-    jre-suts-version : 
-
-    tomcat-tarball   : apache-tomcat-7.0.42
-    tomcat-version   : 7.0.42
-    jackrabbit-tarball:
-  
-  # CONS3RT infrastructure network information #
-  ##############################################
-  infra:
-    network-domain: 
-    salt-master:
-      ip:
-      hostname:
-      fqdn:
-    core-host:
-      ip:
-      hostname:
-      fqdn:
-    database-host:
-      ip:
-      hostname:
-      fqdn:
-    messaging-host:
-      ip:
-      hostname:
-      fqdn:
-    asset-db-host:
-      ip:
-      hostname:
-      fqdn:
-    testmanager-host:
-      ip:
-      hostname:
-      fqdn:
-    ui-host:
-      ip:
-      hostname:
-      fqdn:
-
-  # User and Group details #
-  #########################
-  uid: 500
-  gid: 500
-
-  # QPID #
-  ########
+# CONS3RT Packages
+# ----------------
+# This sections describes all packages utilized by the cons3rt
+# infrastructure. All packages must be hosted on the salt-master
+# within /srv/salt/cons3rt/packages. TODO: Be able to handle other file
+# server backends
+cons3rt-packages:
+  application_path : /opt
+  cons3rt:
+    package        : cons3rt-package-4.4.1.zip
+    version        : 4.4.1
+  tomcat:
+    package        : apache-tomcat-7.0.50.tar.gz 
+    version        : 7.0.50
+  jackrabbit:
+    package        : jackrabbit-webapp-2.6.5.war
+    version        : 2.6.5
+  commons_daemon:
+    windows_package: 
+    windows_version:
+    linux_package  :
+    linux_version  :
   qpid:
-    port:
-  # MySQL #
-  #########
-  mysql-admin-password : cons3rt # This will need to be the hashed password, else cons3rt logins to MySQL will fail.
+    package        :
+    version        :
+  java_jre:
+    package        : jre-7u51-linux-x64.gz
+    version        : 1.7.0_51
+  java_jdk:
+    package        : jdk-7u51-linux-x64.gz
+    version        : 1.7.0_51
+  jcr:
+    package        :
+    version        :
+
+# CONS3RT-System-Users
+# --------------------
+# This section describes the users create for the CONS3RT infrastructure.
+# You change the default uids and gids if they conflict with exisiting 
+# values.
+cons3rt-system-users:
+  cons3rt:
+    uid    : 500
+    gid    : 500
+  jpmsg: 
+    uid    : 501
+    gid    : 501
+  tomcat:
+    uid    : 502
+    gid    : 502
+  uid_min  : 510
+  gid_min  : 510
+
+# CONS3RT
+# -------
+#
+cons3rt:
+  database_root_password   :
+  cons3rt_database_user    : cons3rt
+  cons3rt_database_password:
+  enable_selinux           : False
+  # These values should be defined in CIDR notation
+  infrastructure_network   : 10.10.5.0/24
+  suts_network             : 10.10.6.0/24
+
