@@ -2,7 +2,7 @@
 # ---------------------------------------------
 ################################################################################
 #
-# All values needed for an installation and configuration management of a     
+# All values needed for an installation and configuration management of a
 # cons3rt deployment will be entered here. This pillar file can be copied
 # and renamed to accomadate multiple deployments.
 #
@@ -11,21 +11,27 @@
 # CONS3RT Infrastructure
 # ----------------------
 cons3rt-infrastructure:
-  domain        : 
-  manage_dns    : False
-  dnsservers:
-                - 8.8.8.8
-                - 8.8.4.4
-  search_domain : example.com
-  manage_ntp    : False
-  ntpservers:
-                - 10.10.5.1
-                - 10.10.5.2
-  manage_network: False
-  gateway       : 
-  subnet        : 
+  domain              : 
+  infrastructure_type : aws
+  deployment_type     : environment
+  enable_selinux      : False
+  manage_dns          : False
+  dnsservers :
+    - 8.8.8.8
+    - 8.8.4.4
+  search_domain       : 
+  manage_ntp          : False
+  ntpservers :
+    - 10.10.5.1
+    - 10.10.5.2
+  manage_network      : False
+  gateway             : 
+  subnet              : 
   hosts:
-    cons3rt:
+    infrastructure:
+      hostname  : 
+      ip        : 
+    cons3rt:  
       hostname  : 
       ip        : 
     database:
@@ -62,19 +68,19 @@ cons3rt-packages:
     package        : cons3rt-package-4.4.1.zip
     version        : 4.4.1
   tomcat:
-    package        : apache-tomcat-7.0.50.tar.gz 
+    package        : apache-tomcat-7.0.50.tar.gz
     version        : 7.0.50
   jackrabbit:
     package        : jackrabbit-webapp-2.6.5.war
     version        : 2.6.5
   commons_daemon:
-    windows_package: 
+    windows_package:
     windows_version:
     linux_package  :
     linux_version  :
   qpid:
-    package        :
-    version        :
+    package        : 
+    version        : 
   java_jre:
     package        : jre-7u51-linux-x64.gz
     version        : 1.7.0_51
@@ -88,13 +94,13 @@ cons3rt-packages:
 # CONS3RT-System-Users
 # --------------------
 # This section describes the users create for the CONS3RT infrastructure.
-# You change the default uids and gids if they conflict with exisiting 
+# You change the default uids and gids if they conflict with exisiting
 # values.
 cons3rt-system-users:
   cons3rt:
     uid    : 500
     gid    : 500
-  jpmsg: 
+  jpmsg:
     uid    : 501
     gid    : 501
   tomcat:
@@ -111,7 +117,9 @@ cons3rt:
   cons3rt_database_user    : cons3rt
   cons3rt_database_password:
   enable_selinux           : False
-  # These values should be defined in CIDR notation
   infrastructure_network   : 10.10.5.0/24
   suts_network             : 10.10.6.0/24
+  qpid_messaging_port      : 4443
+  mysql_communication_port : 3306
+
 
