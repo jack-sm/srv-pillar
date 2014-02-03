@@ -96,17 +96,15 @@ cons3rt-packages:
 # values.
 cons3rt-system-users:
   cons3rt:
-    uid    : 500
-    gid    : 500
+    uid            : 500
+    gid            : 500
   jpmsg:
-    uid    : 501
-    gid    : 501
+    uid            : 501
+    gid            : 501
   tomcat:
-    uid    : 502
-    gid    : 502
-  uid_min  : 510
-  gid_min  : 510
-
+    uid            : 502
+    gid            : 502
+  minimum_uid_gid  : 510
 # CONS3RT
 # -------
 #
