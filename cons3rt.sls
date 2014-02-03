@@ -13,7 +13,6 @@
 cons3rt-infrastructure:
   domain              : 
   infrastructure_type : aws
-  deployment_type     : environment
   enable_selinux      : False
   manage_dns          : False
   dnsservers :
@@ -22,8 +21,10 @@ cons3rt-infrastructure:
   search_domain       : 
   manage_ntp          : False
   ntpservers :
-    - 10.10.5.1
-    - 10.10.5.2
+    - 0.north-america.pool.ntp.org
+    - 1.north-america.pool.ntp.org
+    - 2.north-america.pool.ntp.org
+    - 3.north-america.pool.ntp.org
   manage_network      : False
   gateway             : 
   subnet              : 
@@ -31,7 +32,7 @@ cons3rt-infrastructure:
     infrastructure:
       hostname  : 
       ip        : 
-    cons3rt:  
+    cons3rt:
       hostname  : 
       ip        : 
     database:
@@ -66,30 +67,27 @@ cons3rt-packages:
   application_path : /opt
   cons3rt:
     package        : cons3rt-package-4.4.1.zip
-    version        : 4.4.1
+    version        : '4.4.1'
   tomcat:
     package        : apache-tomcat-7.0.50.tar.gz
-    version        : 7.0.50
+    version        : '7.0.50'
   jackrabbit:
     package        : jackrabbit-webapp-2.6.5.war
-    version        : 2.6.5
+    version        : '2.6.5'
   commons_daemon:
-    windows_package:
-    windows_version:
-    linux_package  :
-    linux_version  :
+    version        : '1.0.15'
   qpid:
-    package        : 
-    version        : 
+    package        : qpidd-0.20-rhel6-x64.gz
+    version        : '0.20'
   java_jre:
     package        : jre-7u51-linux-x64.gz
-    version        : 1.7.0_51
+    version        : '1.7.0_51'
   java_jdk:
     package        : jdk-7u51-linux-x64.gz
-    version        : 1.7.0_51
+    version        : '1.7.0_51'
   jcr:
-    package        :
-    version        :
+    package        : jcr-2.0.jar
+    version        : '2.0'
 
 # CONS3RT-System-Users
 # --------------------
@@ -115,11 +113,15 @@ cons3rt-system-users:
 cons3rt:
   database_root_password   :
   cons3rt_database_user    : cons3rt
-  cons3rt_database_password:
-  enable_selinux           : False
-  infrastructure_network   : 10.10.5.0/24
-  suts_network             : 10.10.6.0/24
+  cons3rt_database_password: 
+  infrastructure_network   : 
+  suts_network             :
+    - 10.10.5.0/24
+    - 10.10.6.0/24
+  qpid_use_sasl_auth       : False
+  qpid_use_ssl_encrytion   : False
+  qpid_sasl_password       :
+  qpid_sasldb_path         :
   qpid_messaging_port      : 4443
   mysql_communication_port : 3306
-
 
