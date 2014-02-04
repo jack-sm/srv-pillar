@@ -109,17 +109,28 @@ cons3rt-system-users:
 # -------
 #
 cons3rt:
-  database_root_password   :
-  cons3rt_database_user    : cons3rt
-  cons3rt_database_password: 
-  infrastructure_network   : 
-  suts_network             :
+  database_root_password     :
+  cons3rt_database_user      : cons3rt
+  cons3rt_database_password  : 
+  infrastructure_network     : 
+  suts_network               :
     - 10.10.5.0/24
     - 10.10.6.0/24
-  qpid_use_sasl_auth       : False
-  qpid_use_ssl_encrytion   : False
-  qpid_sasl_password       :
-  qpid_sasldb_path         :
-  qpid_messaging_port      : 4443
-  mysql_communication_port : 3306
+  qpid_use_sasl_auth         : False
+  qpid_use_ssl_encrytion     : False
+  qpid_sasl_password         :
+  qpid_sasldb_path           :
+  qpid_messaging_port        : 4443
+  mysql_communication_port   : 3306
+  guacamole_installed_with_ui: false
+# Valid options for php_timezone in North America:
+# Eastern ...........          America/New_York
+# Central ...........          America/Chicago
+# Mountain ..........          America/Denver
+# Mountain no DST ...          America/Phoenix
+# Pacific ...........          America/Los_Angeles
+# Alaska ............          America/Anchorage
+# Hawaii ............          America/Adak
+# Hawaii no DST .....          Pacific/Honolulu
+  php_timezone               : America/New_York
 
