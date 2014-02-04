@@ -109,28 +109,51 @@ cons3rt-system-users:
 # -------
 #
 cons3rt:
-  database_root_password     :
-  cons3rt_database_user      : cons3rt
-  cons3rt_database_password  : 
-  infrastructure_network     : 
-  suts_network               :
-    - 10.10.5.0/24
-    - 10.10.6.0/24
-  qpid_use_sasl_auth         : False
-  qpid_use_ssl_encrytion     : False
-  qpid_sasl_password         :
-  qpid_sasldb_path           :
-  qpid_messaging_port        : 4443
-  mysql_communication_port   : 3306
-  guacamole_installed_with_ui: false
-# Valid options for php_timezone in North America:
-# Eastern ...........          America/New_York
-# Central ...........          America/Chicago
-# Mountain ..........          America/Denver
-# Mountain no DST ...          America/Phoenix
-# Pacific ...........          America/Los_Angeles
-# Alaska ............          America/Anchorage
-# Hawaii ............          America/Adak
-# Hawaii no DST .....          Pacific/Honolulu
-  php_timezone               : America/New_York
+  database_root_password         :
+  cons3rt_database_user          : cons3rt
+  cons3rt_database_password      : "*0F94843F4DF86103058DA661787FB89CF7E6DC76"
+  enable_selinux                 : false
+  # infrastructure_network - enter the CIDR value of the infrastructure network
+  infrastructure_network         : 
+  # suts_network - enter the CIDR value(s) of the networks that the SUTs are connected
+  #                you may add more then one network
+  #                eg: suts_network
+  #                      - 10.0.0.0/24
+  #                      - 10.0.1.0/24
+  suts_network:
+    - 
+  qpid_use_sasl_auth             : false
+  qpid_use_ssl_encryption        : false
+  qpid_sasl_password             : changeme
+  qpid_sasldb_path               : /var/lib/qpidd/qpidd.sasldb
+  # qpid_messaging_port - for encryption, please use 4443 - unecrypted, please use 5672
+  qpid_messaging_port            : 5672
+  mysql_communication_port       : 3306
+  guacamole_installed_with_ui    : true
+  # Valid options for php_timezone in North America:
+  #
+  # Eastern ...........          America/New_York
+  # Central ...........          America/Chicago
+  # Mountain ..........          America/Denver
+  # Mountain no DST ...          America/Phoenix
+  # Pacific ...........          America/Los_Angeles
+  # Alaska ............          America/Anchorage
+  # Hawaii ............          America/Adak
+  # Hawaii no DST .....          Pacific/Honolulu
+  php_timezone                   : America/New_York
+  # enable_maint_mode - false = webinterface functions as normal
+  #                   - true  = webinterface displays notification to user that system
+  #                             is in maint mode
+  enable_maint_mode              : false
+  # enable_dod_banner - false = the notice and consent banner will not be displayed to users
+  #                   - true  = the notice and consent banner will be displayed to users
+  enable_dod_banner              : true
+  apache_ca_cert_path            : /etc/pki/tls/certs/dod-root-certs.pem
+  apache_cert_path               : /etc/pki/tls/certs/localhost.crt
+  apache_cert_key_path           : /etc/pki/tls/private/localhost.key
+  apache_ca_revocation_path      : /etc/cons3rt_sso/crls
+  # assetrepository_admin_user - admin = default setting
+  assetrepository_admin_user     : admin
+  assetrepositoty_admin_password : admin
+  assetrepository_jks_password   : changeme
 
