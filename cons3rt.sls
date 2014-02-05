@@ -30,32 +30,32 @@ cons3rt-infrastructure:
   subnet              : 
   hosts:
     infrastructure:
-      hostname  : 
-      ip        : 
+      fqdn  : 
+      ip    : 
     cons3rt:
-      hostname  : 
-      ip        : 
+      fqdn  : 
+      ip    : 
     database:
-      hostname  : 
-      ip        : 
+      fqdn  : 
+      ip    : 
     messaging:
-      hostname  : 
-      ip        : 
+      fqdn  : 
+      ip    : 
     assetrepository:
-      hostname  : 
-      ip        : 
+      fqdn  : 
+      ip    : 
     webinterface:
-      hostname  : 
-      ip        : 
+      fqdn  : 
+      ip    : 
     sourcebuilder:
-      hostname  : 
-      ip        : 
+      fqdn  : 
+      ip    : 
     testmanager:
-      hostname  : 
-      ip        : 
+      fqdn  : 
+      ip    : 
     retina:
-      hostname  : 
-      ip        : 
+      fqdn  : 
+      ip    : 
 
 # CONS3RT Packages
 # ----------------
