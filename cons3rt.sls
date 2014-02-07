@@ -29,6 +29,9 @@ cons3rt-infrastructure:
   gateway             : 
   subnet              : 
   hosts:
+    administration:
+      fqdn  :
+      ip    :
     infrastructure:
       fqdn  : 
       ip    : 
@@ -65,6 +68,15 @@ cons3rt-infrastructure:
 # server backends
 cons3rt-packages:
   application_path : /opt
+  # baseline_packages - a list of needed packages that will be installed on 
+  #                     all cons3rt infrastructure linux based machines
+  baseline_packages:
+    - vim
+    - zip
+    - unzip
+    - patch
+    - bind-utils
+    - openssh-clients
   cons3rt:
     package        : cons3rt-package-4.4.1.zip
     version        : '4.4.1'
