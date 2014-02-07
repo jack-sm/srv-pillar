@@ -117,31 +117,52 @@ cons3rt-system-users:
     uid            : 502
     gid            : 502
   minimum_uid_gid  : 510
+  ec2-user_gid     : 510
 # CONS3RT
 # -------
 #
 cons3rt:
-  database_root_password         :
-  cons3rt_database_user          : cons3rt
-  cons3rt_database_password      : "*0F94843F4DF86103058DA661787FB89CF7E6DC76"
-  enable_selinux                 : false
-  # infrastructure_network - enter the CIDR value of the infrastructure network
-  infrastructure_network         : 
-  # suts_network - enter the CIDR value(s) of the networks that the SUTs are connected
+  # database_root_password - The mysql database password that is used my saltstack to
+  #                          manage the mysql database. Leave this blank if using the
+  #                          otto cons3rt installer. Make sure to enclose the hash within
+  #                          quotes as for yaml parsing.
+  #                          
+  #                          example:
+  #                          mysql -e "select password('mypassword')"
+  #                          output:
+  #                          +-------------------------------------------+
+  #                          | password('mypassword')                    |
+  #                          +-------------------------------------------+
+  #                          | *FABE5482D5AADF36D028AC443D117BE1180B9725 |
+  #                          +-------------------------------------------+
+  #                        
+  database_root_password              :
+  # cons3rt_database_user - The database user that cons3rt will use to interact with
+  #                         the mysql database.
+  cons3rt_database_user               : cons3rt
+  # cons3rt_database_password - Must be the mysql hashed password - reference the example
+  #                             above
+  cons3rt_database_password           : "*0F94843F4DF86103058DA661787FB89CF7E6DC76"
+  enable_selinux                      : false
+  # infrastructure_network - Enter the CIDR value of the infrastructure network or each IP
+  infrastructure_network              : 
+  # suts_network - Enter the CIDR value(s) of the networks that the SUTs are connected
   #                you may add more then one network
   #                eg: suts_network
   #                      - 10.0.0.0/24
   #                      - 10.0.1.0/24
   suts_network:
     - 
-  qpid_use_sasl_auth             : false
-  qpid_use_ssl_encryption        : false
-  qpid_sasl_password             : changeme
-  qpid_sasldb_path               : /var/lib/qpidd/qpidd.sasldb
+  # qpid_use_sasl_auth - Make sure the server certificates are available on the saltmaster
+  #                      before enabling this.
+  qpid_use_sasl_auth                  : false
+  qpid_use_ssl_encryption             : false
+  qpid_sasl_password                  : changeme
+  qpid_sasldb_path                    : /var/lib/qpidd/qpidd.sasldb
   # qpid_messaging_port - for encryption, please use 4443 - unecrypted, please use 5672
-  qpid_messaging_port            : 5672
-  mysql_communication_port       : 3306
-  guacamole_installed_with_ui    : true
+  qpid_messaging_port                 : 5672
+  mysql_communication_port            : 3306
+  guacamole_installed_with_ui         : true
   # Valid options for php_timezone in North America:
   #
   # Eastern ...........          America/New_York
@@ -152,20 +173,25 @@ cons3rt:
   # Alaska ............          America/Anchorage
   # Hawaii ............          America/Adak
   # Hawaii no DST .....          Pacific/Honolulu
-  php_timezone                   : America/New_York
+  php_timezone                        : America/New_York
   # enable_maint_mode - false = webinterface functions as normal
   #                   - true  = webinterface displays notification to user that system
   #                             is in maint mode
-  enable_maint_mode              : false
+  enable_maint_mode                   : false
   # enable_dod_banner - false = the notice and consent banner will not be displayed to users
   #                   - true  = the notice and consent banner will be displayed to users
-  enable_dod_banner              : true
-  apache_ca_cert_path            : /etc/pki/tls/certs/dod-root-certs.pem
-  apache_cert_path               : /etc/pki/tls/certs/localhost.crt
-  apache_cert_key_path           : /etc/pki/tls/private/localhost.key
-  apache_ca_revocation_path      : /etc/cons3rt_sso/crls
-  # assetrepository_admin_user - admin = default setting
-  assetrepository_admin_user     : admin
-  assetrepositoty_admin_password : admin
-  assetrepository_jks_password   : changeme
-
+  enable_dod_banner                   : true
+  apache_ca_cert_path                 : /etc/pki/tls/certs/dod-root-certs.pem
+  apache_cert_path                    : /etc/pki/tls/certs/localhost.crt
+  apache_cert_key_path                : /etc/pki/tls/private/localhost.key
+  apache_ca_revocation_path           : /etc/cons3rt_sso/crls
+  # assetrepository_admin_user - This value pertains to the tomcat user manager. 
+  #                              admin = default setting.
+  assetrepository_admin_user          : admin
+  # assetrepositoty_admin_password - This value pertains to the tomcat user manager.
+  #                              admin = default setting.
+  assetrepository_admin_password      : admin
+  assetrepository_truststore_path     : 
+  assetrepository_truststore_password : changeme
+  webinterface_jks_path               :
+  webinterface_jks_password           :
