@@ -11,7 +11,10 @@
 # CONS3RT Infrastructure
 # ----------------------
 cons3rt-infrastructure:
-  domain              : 
+  domain              :
+  # infrastructure_type - Used to define the infrastructure type that cons3rt will
+  #                       be deployed within.
+  #                       Valid values = aws, openstack, kvm, vmware
   infrastructure_type : aws
   enable_selinux      : False
   manage_dns          : False
@@ -19,7 +22,6 @@ cons3rt-infrastructure:
     - 8.8.8.8
     - 8.8.4.4
   search_domain       : 
-  manage_ntp          : False
   ntpservers :
     - 0.north-america.pool.ntp.org
     - 1.north-america.pool.ntp.org
@@ -118,6 +120,22 @@ cons3rt-system-users:
     gid            : 502
   minimum_uid_gid  : 510
   ec2-user_gid     : 510
+# CONS3RT-Admin-Users
+# This section if for the addition of admin users to all cons3rt infrastructure
+# machines.
+cons3rt-administrators:
+  cons3rt_admin_group : cons3rt-administrators
+  cons3rt_admin_gid   : 510
+  # administrators - The format below uses the administrator user name as a key with
+  #                  ssh-key as an attribute. When pasting the ssh public key, use single 
+  #                  quotes to encase it. Use the following example:
+  #                  joesmith:
+  #                    ssh_key : 'ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEApZmDfjSje4CrbEcin9gUCBm2NMn4G7cAV2pgg008tsFIf90WcVPRZw1GpOwk6+0jrJwF5S9Jp4Tkc7rJ4mPiI7P8OnereOFc/lm3qhTt1Bt52Rqtz8B611Fs6QJ+L1T4DHzOulrncDFufy6QLgRGA3Cnt2Cm0CR3Eg+Xt0DLHptYA0O2Rlkjpu2p6q8CxzS2zzqHBI16CIW4VlEUTwF4mganZwwPZdyZBXyf6x4yLDgts3P/3kkw4FJEPmmB+qcNDVuUyqO9ru8tiY9EEuDayR+4ekjMi/yFOpxQRyF8MKB946dhSUQ9nEEZb9V3ZfvxvuXM4kck/Stez+z/39ygDQ== joesmith@saltmaster.example.com'
+
+  administrators:
+    someuser:
+      ssh_key: ''
+
 # CONS3RT
 # -------
 #
