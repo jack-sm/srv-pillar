@@ -1,12 +1,12 @@
 # CONS3RT System Configuration Manangement Data
 # ---------------------------------------------
-################################################################################
+##########################################################################
 #
 # All values needed for an installation and configuration management of a
 # cons3rt deployment will be entered here. This pillar file can be copied
 # and renamed to accomadate multiple deployments.
 #
-##############################################################################
+##########################################################################
 
 # CONS3RT Infrastructure
 # ----------------------
@@ -34,9 +34,6 @@ cons3rt-infrastructure:
     administration:
       fqdn  :
       ip    :
-    infrastructure:
-      fqdn  : 
-      ip    : 
     cons3rt:
       fqdn  : 
       ip    : 
@@ -119,7 +116,7 @@ cons3rt-system-users:
     uid            : 502
     gid            : 502
   minimum_uid_gid  : 510
-  ec2-user_gid     : 510
+  ec2-user_gid     : 505
 # CONS3RT-Admin-Users
 # This section if for the addition of admin users to all cons3rt infrastructure
 # machines.
@@ -209,7 +206,7 @@ cons3rt:
   # assetrepositoty_admin_password - This value pertains to the tomcat user manager.
   #                              admin = default setting.
   assetrepository_admin_password      : admin
-  assetrepository_truststore_path     : 
+  assetrepository_truststore_path     : /home/tomcat/assetrepo.jks 
   assetrepository_truststore_password : changeme
   webinterface_jks_path               :
   webinterface_jks_password           :
