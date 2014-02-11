@@ -206,7 +206,7 @@ cons3rt:
   # assetrepositoty_admin_password - This value pertains to the tomcat user manager.
   #                              admin = default setting.
   assetrepository_admin_password      : admin
-  assetrepository_truststore_path     : /home/tomcat/assetrepo.jks 
-  assetrepository_truststore_password : changeme
+  assetrepository_jks_path            : /home/tomcat/assetrepo.jks 
+  assetrepository_jks_password        : changeme
   webinterface_jks_path               :
   webinterface_jks_password           :
