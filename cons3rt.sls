@@ -11,25 +11,58 @@
 # CONS3RT Infrastructure
 # ----------------------
 cons3rt-infrastructure:
+  
+  # domain - Define the domain that the cons3rt infrastructure will reside within
   domain              :
+
   # infrastructure_type - Used to define the infrastructure type that cons3rt will
   #                       be deployed within.
   #                       Valid values = aws, openstack, kvm, vmware
   infrastructure_type : aws
+
+  # deployment_type - Used to determine if cons3rt deployment will be completed using
+  #                   otto installer or saltstack
+  #                   Valid values = otto, saltstack
+  deployment_type     : otto
+
   enable_selinux      : False
-  manage_dns          : False
-  dnsservers :
-    - 8.8.8.8
-    - 8.8.4.4
-  search_domain       : 
+
+  # ntpservers - define a list of ntp servers that the cons3rt infrastructure vm's will
+  #              use
   ntpservers :
     - 0.north-america.pool.ntp.org
     - 1.north-america.pool.ntp.org
     - 2.north-america.pool.ntp.org
     - 3.north-america.pool.ntp.org
-  manage_network      : False
+  
+  # CONS3RT Network Information 
+  # ---------------------------
+  ##########################################################################
+  #
+  # The following values must be populated when infrastructure_type is set 
+  # to kvm or vmware.
+  #
+  ##########################################################################
+
+  dnsservers :
+    - 8.8.8.8
+    - 8.8.4.4
+  search_domain       :
   gateway             : 
   subnet              : 
+  
+  # CONS3RT Infrastructure Hosts
+  # ----------------------------
+  ##########################################################################
+  #
+  # Define all the fqdns and ip addresses for the cons3rt infrastructure hosts.
+  # You may define the same fdqn and ip for multiple roles except the following
+  # rules:
+  #   - The assetrepository cannot be on the same host as the webinterface.
+  #   - The retina server must be defined on a windows host alone.
+  #
+  ##########################################################################
+
   hosts:
     administration:
       fqdn  :
@@ -61,16 +94,20 @@ cons3rt-infrastructure:
 
 # CONS3RT Packages
 # ----------------
-# This sections describes all packages utilized by the cons3rt
-# infrastructure. All packages must be hosted on the salt-master
+# This section describes all packages utilized by the cons3rt
+# infrastructure. All packages must be hosted on the salt master
 # within /srv/salt/cons3rt/packages. TODO: Be able to handle other file
 # server backends
 cons3rt-packages:
+  
+  # application_path - default path that all applications used by cons3rt will
+  #                    be installed to.
   application_path : /opt
-  # baseline_packages - a list of needed packages that will be installed on 
+
+  # baseline_packages - a list of extra packages that will be installed on 
   #                     all cons3rt infrastructure linux based machines
   baseline_packages:
-    - vim
+    - vim-enhanced
     - zip
     - unzip
     - patch
@@ -78,7 +115,7 @@ cons3rt-packages:
     - openssh-clients
   cons3rt:
     package        : cons3rt-package-4.4.1.zip
-    version        : '4.4.1'
+    version        : '4.4.2'
   tomcat:
     package        : apache-tomcat-7.0.50.tar.gz
     version        : '7.0.50'
@@ -102,8 +139,8 @@ cons3rt-packages:
 
 # CONS3RT-System-Users
 # --------------------
-# This section describes the users create for the CONS3RT infrastructure.
-# You change the default uids and gids if they conflict with exisiting
+# This section describes the users that will be created for the CONS3RT infrastructure.
+# You can change the default uids and gids if they conflict with exisiting
 # values.
 cons3rt-system-users:
   cons3rt:
@@ -118,12 +155,12 @@ cons3rt-system-users:
   minimum_uid_gid  : 510
   ec2-user_gid     : 505
 # CONS3RT-Admin-Users
-# This section if for the addition of admin users to all cons3rt infrastructure
+# This section is for the addition of admin users to all cons3rt infrastructure
 # machines.
 cons3rt-administrators:
   cons3rt_admin_group : cons3rt-administrators
   cons3rt_admin_gid   : 510
-  # administrators - The format below uses the administrator user name as a key with
+  # administrators - The format below uses the administrators user name as a key with
   #                  ssh-key as an attribute. When pasting the ssh public key, use single 
   #                  quotes to encase it. Use the following example:
   #                  joesmith:
@@ -158,6 +195,7 @@ cons3rt:
   # cons3rt_database_password - Must be the mysql hashed password - reference the example
   #                             above
   cons3rt_database_password           : "*0F94843F4DF86103058DA661787FB89CF7E6DC76"
+  # enable_selinux - Choose the selinux setting desired
   enable_selinux                      : false
   # infrastructure_network - Enter the CIDR value of the infrastructure network or each IP
   infrastructure_network              : 
@@ -174,7 +212,7 @@ cons3rt:
   qpid_use_ssl_encryption             : false
   qpid_sasl_password                  : changeme
   qpid_sasldb_path                    : /var/lib/qpidd/qpidd.sasldb
-  # qpid_messaging_port - for encryption, please use 4443 - unecrypted, please use 5672
+  # qpid_messaging_port - for encryption, use 4443 - unencrypted, use 5672
   qpid_messaging_port                 : 5672
   mysql_communication_port            : 3306
   guacamole_installed_with_ui         : true
