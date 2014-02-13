@@ -40,10 +40,9 @@ cons3rt-infrastructure:
   ##########################################################################
   #
   # The following values must be populated when infrastructure_type is set 
-  # to kvm or vmware.
+  # to kvm or vmware which are considered to be managed infrastructures.
   #
   ##########################################################################
-
   dnsservers :
     - 8.8.8.8
     - 8.8.4.4
@@ -62,7 +61,6 @@ cons3rt-infrastructure:
   #   - The retina server must be defined on a windows host alone.
   #
   ##########################################################################
-
   hosts:
     administration:
       fqdn  :
@@ -81,7 +79,10 @@ cons3rt-infrastructure:
       ip    : 
     webinterface:
       fqdn  : 
-      ip    : 
+      ip    :
+    remoteaccessgateway:
+      fqdn  :
+      ip    :
     sourcebuilder:
       fqdn  : 
       ip    : 
@@ -99,11 +100,9 @@ cons3rt-infrastructure:
 # within /srv/salt/cons3rt/packages. TODO: Be able to handle other file
 # server backends
 cons3rt-packages:
-  
   # application_path - default path that all applications used by cons3rt will
-  #                    be installed to.
+  #                    be installed within.
   application_path : /opt
-
   # baseline_packages - a list of extra packages that will be installed on 
   #                     all cons3rt infrastructure linux based machines
   baseline_packages:
@@ -113,6 +112,8 @@ cons3rt-packages:
     - patch
     - bind-utils
     - openssh-clients
+    - python-augeas
+  # The following packages are required to be defined
   cons3rt:
     package        : cons3rt-package-4.4.1.zip
     version        : '4.4.2'
@@ -154,7 +155,9 @@ cons3rt-system-users:
     gid            : 502
   minimum_uid_gid  : 510
   ec2-user_gid     : 505
-# CONS3RT-Admin-Users
+
+# CONS3RT-Administrators
+# ----------------------
 # This section is for the addition of admin users to all cons3rt infrastructure
 # machines.
 cons3rt-administrators:
@@ -165,7 +168,6 @@ cons3rt-administrators:
   #                  quotes to encase it. Use the following example:
   #                  joesmith:
   #                    ssh_key : 'ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEApZmDfjSje4CrbEcin9gUCBm2NMn4G7cAV2pgg008tsFIf90WcVPRZw1GpOwk6+0jrJwF5S9Jp4Tkc7rJ4mPiI7P8OnereOFc/lm3qhTt1Bt52Rqtz8B611Fs6QJ+L1T4DHzOulrncDFufy6QLgRGA3Cnt2Cm0CR3Eg+Xt0DLHptYA0O2Rlkjpu2p6q8CxzS2zzqHBI16CIW4VlEUTwF4mganZwwPZdyZBXyf6x4yLDgts3P/3kkw4FJEPmmB+qcNDVuUyqO9ru8tiY9EEuDayR+4ekjMi/yFOpxQRyF8MKB946dhSUQ9nEEZb9V3ZfvxvuXM4kck/Stez+z/39ygDQ== joesmith@saltmaster.example.com'
-
   administrators:
     someuser:
       ssh_key: ''
@@ -174,6 +176,9 @@ cons3rt-administrators:
 # -------
 #
 cons3rt:
+  # cons3rt_home_path - The path that cons3rt will be installed within.
+  #                     Defaults to /cons3rt if not defined.
+  cons3rt_home_path                   : /cons3rt
   # database_root_password - The mysql database password that is used my saltstack to
   #                          manage the mysql database. Leave this blank if using the
   #                          otto cons3rt installer. Make sure to enclose the hash within
@@ -195,13 +200,20 @@ cons3rt:
   # cons3rt_database_password - Must be the mysql hashed password - reference the example
   #                             above
   cons3rt_database_password           : "*0F94843F4DF86103058DA661787FB89CF7E6DC76"
-  # enable_selinux - Choose the selinux setting desired
+  # enable_selinux - Choose to enable selinux or disable it.
+  #                  Valid options - true or false
   enable_selinux                      : false
-  # infrastructure_network - Enter the CIDR value of the infrastructure network or each IP
-  infrastructure_network              : 
+  # infrastructure_network - Enter the CIDR value of the infrastructure network, each IP
+  #                          of infrastructure host, or both.
+  #                          eg: infrastructure_network:
+  #                                - 10.0.1.1
+  #                                - 10.0.1.2
+  #                                - 10.0.1.0/28
+  infrastructure_network:
+    - 
   # suts_network - Enter the CIDR value(s) of the networks that the SUTs are connected
-  #                you may add more then one network
-  #                eg: suts_network
+  #                you may add more then one network.
+  #                eg: suts_network:
   #                      - 10.0.0.0/24
   #                      - 10.0.1.0/24
   suts_network:
