@@ -45,7 +45,7 @@ cons3rt-infrastructure:
     - 8.8.4.4
   search_domain:
   gateway: 
-  subnet: 
+  netmask: 
   
   # CONS3RT Infrastructure Hosts
   # ----------------------------
