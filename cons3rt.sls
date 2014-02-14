@@ -10,23 +10,20 @@
 
 # CONS3RT Infrastructure
 # ----------------------
-cons3rt-infrastructure:
-  
+cons3rt-infrastructure: 
   # domain - Define the domain that the cons3rt infrastructure will reside within
-  domain              :
-
+  domain:
   # infrastructure_type - Used to define the infrastructure type that cons3rt will
   #                       be deployed within.
   #                       Valid values = aws, openstack, kvm, vmware
-  infrastructure_type : aws
-
+  infrastructure_type: aws
   # deployment_type - Used to determine if cons3rt deployment will be completed using
   #                   otto installer or saltstack
   #                   Valid values = otto, saltstack
-  deployment_type     : otto
-
-  enable_selinux      : False
-
+  deployment_type: otto
+  # enable_selinux - Choose to enable selinux or disable it.
+  #                  Valid options - true or false
+  enable_selinux: False
   # ntpservers - define a list of ntp servers that the cons3rt infrastructure vm's will
   #              use
   ntpservers :
@@ -43,12 +40,12 @@ cons3rt-infrastructure:
   # to kvm or vmware which are considered to be managed infrastructures.
   #
   ##########################################################################
-  dnsservers :
+  dnsservers:
     - 8.8.8.8
     - 8.8.4.4
-  search_domain       :
-  gateway             : 
-  subnet              : 
+  search_domain:
+  gateway: 
+  subnet: 
   
   # CONS3RT Infrastructure Hosts
   # ----------------------------
@@ -63,35 +60,35 @@ cons3rt-infrastructure:
   ##########################################################################
   hosts:
     administration:
-      fqdn  :
-      ip    :
+      fqdn:
+      ip:
     cons3rt:
-      fqdn  : 
-      ip    : 
+      fqdn: 
+      ip: 
     database:
-      fqdn  : 
-      ip    : 
+      fqdn: 
+      ip: 
     messaging:
-      fqdn  : 
-      ip    : 
+      fqdn: 
+      ip: 
     assetrepository:
-      fqdn  : 
-      ip    : 
+      fqdn: 
+      ip: 
     webinterface:
-      fqdn  : 
-      ip    :
+      fqdn: 
+      ip:
     remoteaccessgateway:
-      fqdn  :
-      ip    :
+      fqdn:
+      ip:
     sourcebuilder:
-      fqdn  : 
-      ip    : 
+      fqdn: 
+      ip: 
     testmanager:
-      fqdn  : 
-      ip    : 
+      fqdn: 
+      ip: 
     retina:
-      fqdn  : 
-      ip    : 
+      fqdn: 
+      ip: 
 
 # CONS3RT Packages
 # ----------------
@@ -102,7 +99,7 @@ cons3rt-infrastructure:
 cons3rt-packages:
   # application_path - default path that all applications used by cons3rt will
   #                    be installed within.
-  application_path : /opt
+  application_path: /opt
   # baseline_packages - a list of extra packages that will be installed on 
   #                     all cons3rt infrastructure linux based machines
   baseline_packages:
@@ -113,30 +110,31 @@ cons3rt-packages:
     - bind-utils
     - openssh-clients
     - python-augeas
+    - pyOpenSSL
   # The following packages are required to be defined
   cons3rt:
-    package        : cons3rt-package-4.4.1.zip
-    version        : '4.4.2'
+    package: cons3rt-package-4.4.1.zip
+    version: '4.4.2'
   tomcat:
-    package        : apache-tomcat-7.0.50.tar.gz
-    version        : '7.0.50'
+    package: apache-tomcat-7.0.50.tar.gz
+    version: '7.0.50'
   jackrabbit:
-    package        : jackrabbit-webapp-2.6.5.war
-    version        : '2.6.5'
+    package: jackrabbit-webapp-2.6.5.war
+    version: '2.6.5'
   commons_daemon:
-    version        : '1.0.15'
+    version: '1.0.15'
   qpid:
-    package        : qpidd-0.20-rhel6-x64.gz
-    version        : '0.20'
+    package: qpidd-0.20-rhel6-x64.gz
+    version: '0.20'
   java_jre:
-    package        : jre-7u51-linux-x64.gz
-    version        : '1.7.0_51'
+    package: jre-7u51-linux-x64.gz
+    version: '1.7.0_51'
   java_jdk:
-    package        : jdk-7u51-linux-x64.gz
-    version        : '1.7.0_51'
+    package: jdk-7u51-linux-x64.gz
+    version: '1.7.0_51'
   jcr:
-    package        : jcr-2.0.jar
-    version        : '2.0'
+    package: jcr-2.0.jar
+    version: '2.0'
 
 # CONS3RT-System-Users
 # --------------------
@@ -176,9 +174,9 @@ cons3rt-administrators:
 # -------
 #
 cons3rt:
-  # cons3rt_home_path - The path that cons3rt will be installed within.
+  # cons3rt_path - The path that cons3rt will be installed within.
   #                     Defaults to /cons3rt if not defined.
-  cons3rt_home_path                   : /cons3rt
+  cons3rt_path: /cons3rt
   # database_root_password - The mysql database password that is used my saltstack to
   #                          manage the mysql database. Leave this blank if using the
   #                          otto cons3rt installer. Make sure to enclose the hash within
@@ -193,24 +191,13 @@ cons3rt:
   #                          | *FABE5482D5AADF36D028AC443D117BE1180B9725 |
   #                          +-------------------------------------------+
   #                        
-  database_root_password              :
+  database_root_password:
   # cons3rt_database_user - The database user that cons3rt will use to interact with
   #                         the mysql database.
-  cons3rt_database_user               : cons3rt
+  cons3rt_database_user: cons3rt
   # cons3rt_database_password - Must be the mysql hashed password - reference the example
   #                             above
-  cons3rt_database_password           : "*0F94843F4DF86103058DA661787FB89CF7E6DC76"
-  # enable_selinux - Choose to enable selinux or disable it.
-  #                  Valid options - true or false
-  enable_selinux                      : false
-  # infrastructure_network - Enter the CIDR value of the infrastructure network, each IP
-  #                          of infrastructure host, or both.
-  #                          eg: infrastructure_network:
-  #                                - 10.0.1.1
-  #                                - 10.0.1.2
-  #                                - 10.0.1.0/28
-  infrastructure_network:
-    - 
+  cons3rt_database_password: "*0F94843F4DF86103058DA661787FB89CF7E6DC76"
   # suts_network - Enter the CIDR value(s) of the networks that the SUTs are connected
   #                you may add more then one network.
   #                eg: suts_network:
@@ -220,14 +207,13 @@ cons3rt:
     - 
   # qpid_use_sasl_auth - Make sure the server certificates are available on the saltmaster
   #                      before enabling this.
-  qpid_use_sasl_auth                  : false
-  qpid_use_ssl_encryption             : false
-  qpid_sasl_password                  : changeme
-  qpid_sasldb_path                    : /var/lib/qpidd/qpidd.sasldb
+  qpid_use_sasl_auth: false
+  qpid_use_ssl_encryption: false
+  qpid_sasl_password: changeme
+  qpid_sasldb_path: /var/lib/qpidd/qpidd.sasldb
   # qpid_messaging_port - for encryption, use 4443 - unencrypted, use 5672
-  qpid_messaging_port                 : 5672
-  mysql_communication_port            : 3306
-  guacamole_installed_with_ui         : true
+  qpid_messaging_port: 5672
+  mysql_communication_port: 3306
   # Valid options for php_timezone in North America:
   #
   # Eastern ...........          America/New_York
@@ -238,25 +224,25 @@ cons3rt:
   # Alaska ............          America/Anchorage
   # Hawaii ............          America/Adak
   # Hawaii no DST .....          Pacific/Honolulu
-  php_timezone                        : America/New_York
+  php_timezone: America/New_York
   # enable_maint_mode - false = webinterface functions as normal
   #                   - true  = webinterface displays notification to user that system
   #                             is in maint mode
-  enable_maint_mode                   : false
+  enable_maint_mode: false
   # enable_dod_banner - false = the notice and consent banner will not be displayed to users
   #                   - true  = the notice and consent banner will be displayed to users
-  enable_dod_banner                   : true
-  apache_ca_cert_path                 : /etc/pki/tls/certs/dod-root-certs.pem
-  apache_cert_path                    : /etc/pki/tls/certs/localhost.crt
-  apache_cert_key_path                : /etc/pki/tls/private/localhost.key
-  apache_ca_revocation_path           : /etc/cons3rt_sso/crls
+  enable_dod_banner: true
+  apache_ca_cert_path: /etc/pki/tls/certs/dod-root-certs.pem
+  apache_cert_path: /etc/pki/tls/certs/localhost.crt
+  apache_cert_key_path: /etc/pki/tls/private/localhost.key
+  apache_ca_revocation_path: /etc/cons3rt_sso/crls
   # assetrepository_admin_user - This value pertains to the tomcat user manager. 
   #                              admin = default setting.
-  assetrepository_admin_user          : admin
+  assetrepository_admin_user: admin
   # assetrepositoty_admin_password - This value pertains to the tomcat user manager.
   #                              admin = default setting.
-  assetrepository_admin_password      : admin
-  assetrepository_jks_path            : /home/tomcat/assetrepo.jks 
-  assetrepository_jks_password        : changeme
-  webinterface_jks_path               :
-  webinterface_jks_password           :
+  assetrepository_admin_password: admin
+  assetrepository_jks_path: /home/tomcat/assetrepo.jks 
+  assetrepository_jks_password: changeme
+  webinterface_jks_path:
+  webinterface_jks_password:
