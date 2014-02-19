@@ -198,6 +198,7 @@ cons3rt:
   # cons3rt_database_password - Must be the mysql hashed password - reference the example
   #                             above
   cons3rt_database_password: "*0F94843F4DF86103058DA661787FB89CF7E6DC76"
+  mysql_communication_port: 3306
   # suts_network - Enter the CIDR value(s) of the networks that the SUTs are connected
   #                you may add more then one network.
   #                eg: suts_network:
@@ -208,31 +209,23 @@ cons3rt:
   # ca_certificate - The name of the ca certificate that will be used by apache and also
   #                  in the creation of java keystores for all of the cons3rt infrastructure.
   #                  In order to simplify the process, all certificates should be combined
-  #                  into one pem file. Place this file in the file server directory:
-  #                  cons3rt/ssl
-  ca_certificate:  
+  #                  into one x509 encoded pem file. Place this file in the file server directory:
+  #                  cons3rt/tls
+  ca_certificate_filename:
+  # ca_nickname - The nickname that will be used as an alias for the ca certificate designated above
+  ca_certificate_alias: 
   # qpid_use_sasl_auth - Use sasl auth with qpid. Highly recommended to use with SSL encryption
   #                      enabled.
   qpid_use_sasl_auth: false
-  # qpid_use_ssl_encryption - Use SSL encryption with qpid. Requires that the messaging server
-  #                           certificate, certificate key file, and ca certificate be present
-  #                           on the fileserver located in cons3rt/ssl
-  qpid_use_ssl_encryption: false
   qpid_sasl_password: changeme
-  qpid_sasldb_path: /var/lib/qpidd/qpidd.sasldb
-  qpid_ssldb_path: /var/lib/qpidd/keys
+  qpid_sasldb: /var/lib/qpidd/qpidd.sasldb
+  qpid_use_ssl_encryption: false
+  qpid_ssldb: /var/lib/qpidd/keys/server_db
   qpid_ssldb_password: changeme
-  # qpid_ssl_cert_password - The paraphrase that will be used to create the p12 
-  qpid_ssl_cert_password :
-  # qpid_ssl_crt - The name of the server certificate located on the saltmaster fileserver for
-  #                qpid SSL encryption. Must be pem formatted.
-  qpid_ssl_cert          :
-  # qpid_ssl_cert_key - The name of the server certificate key located on the saltmaster fileserver
-  #                     for qpid SSL encryption. Must be pem formatted.
-  qpid_ssl_cert_key      :
+  # qpid_ssl_cert_password - The paraphrase that will be used to create the messaging pkcs12 
+  qpid_ssl_cert_password:
   # qpid_messaging_port - for SSL encryption, use 4443 - unencrypted, use 5672
   qpid_messaging_port: 5672
-  mysql_communication_port: 3306
   # Valid options for php_timezone in North America:
   #
   # Eastern ...........          America/New_York
