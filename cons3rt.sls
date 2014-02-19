@@ -172,11 +172,14 @@ cons3rt-administrators:
 
 # CONS3RT
 # -------
-#
+# This section outlines all the underlining details specifically pertaining to cons3rt
 cons3rt:
   # cons3rt_path - The path that cons3rt will be installed within.
   #                     Defaults to /cons3rt if not defined.
   cons3rt_path: /cons3rt
+
+  # Database
+  # --------
   # database_root_password - The mysql database password that is used my saltstack to
   #                          manage the mysql database. Leave this blank if using the
   #                          otto cons3rt installer. Make sure to enclose the hash within
@@ -199,6 +202,9 @@ cons3rt:
   #                             above
   cons3rt_database_password: "*0F94843F4DF86103058DA661787FB89CF7E6DC76"
   mysql_communication_port: 3306
+
+  # Samba/NFS
+  # ---------
   # suts_network - Enter the CIDR value(s) of the networks that the SUTs are connected
   #                you may add more then one network.
   #                eg: suts_network:
@@ -206,6 +212,9 @@ cons3rt:
   #                      - 10.0.1.0/24
   suts_network:
     -
+
+  # Messaging
+  # ---------
   # ca_certificate - The name of the ca certificate that will be used by apache and also
   #                  in the creation of java keystores for all of the cons3rt infrastructure.
   #                  In order to simplify the process, all certificates should be combined
@@ -226,6 +235,9 @@ cons3rt:
   qpid_ssl_cert_password:
   # qpid_messaging_port - for SSL encryption, use 4443 - unencrypted, use 5672
   qpid_messaging_port: 5672
+  
+  # Webinterface
+  # ------------
   # Valid options for php_timezone in North America:
   #
   # Eastern ...........          America/New_York
@@ -248,6 +260,11 @@ cons3rt:
   apache_cert_path: /etc/pki/tls/certs/localhost.crt
   apache_cert_key_path: /etc/pki/tls/private/localhost.key
   apache_ca_revocation_path: /etc/cons3rt_sso/crls
+  webinterface_jks_path: /home/tomcat/webinterface.jks
+  webinterface_jks_password: changeme
+
+  # Assetrepository
+  # ---------------
   # assetrepository_admin_user - This value pertains to the tomcat user manager. 
   #                              admin = default setting.
   assetrepository_admin_user: admin
@@ -256,7 +273,8 @@ cons3rt:
   assetrepository_admin_password: admin
   assetrepository_jks_path: /home/tomcat/assetrepo.jks 
   assetrepository_jks_password: changeme
-  webinterface_jks_path: /home/tomcat/webinterface.jks
-  webinterface_jks_password: changeme
+
+  # Remoteaccessgateway
+  # -------------------
   remoteaccessgateway_jks_path: /home/tomcat/remoteaccessgateway.jks
   remoteaccessgateway_jks_password: changeme
