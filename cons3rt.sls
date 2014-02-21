@@ -153,7 +153,13 @@ cons3rt-system-users:
   ec2-user_gid     : 505
   # root_user_password - Define the root password set on all linux vms composing the
   #                      cons3rt infrastructure. Please provide the hashed value as
-  #                      found in /etc/passwd.
+  #                      found in /etc/passwd. Encase the provided hashed password
+  #                      with in double quotes.
+  #                      example:
+  #                      python -c "import crypt, getpass, pwd, os;print crypt.crypt('<Your Password>', '\$6\$'+os.urandom(16).encode('base_64')+'\$')"
+  #
+  #                      Replace the <Your Password> to generate a proper SHA-512 
+  #                      hashed passsword suitable for /etc/shadow
   root_user_password:
 
 # CONS3RT-Administrators
@@ -283,7 +289,5 @@ cons3rt:
 
   # Remoteaccessgateway
   # -------------------
-  # assetrepository_jks_password - Defines the password that id used to unlock the java keystore
-  #                                which resides on the assetrepository machine. The keystore
-  #                                is located with /home/tomcat/assetrepository.jks
-  remoteaccessgateway_jks_password: changeme
+  # remoteaccessgateway_tcp_port - Define the tcp port on which the guacamole service will listen.
+  remoteaccessgateway_tcp_port: 9443
