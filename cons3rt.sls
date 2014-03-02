@@ -45,50 +45,84 @@ cons3rt-infrastructure:
     - 8.8.4.4
   search_domain:
   gateway: 
-  netmask: 
+  netmask:
   
   # CONS3RT Infrastructure Hosts
   # ----------------------------
   ##########################################################################
   #
-  # Define all the fqdns and ip addresses for the cons3rt infrastructure hosts.
-  # You may define the same fdqn and ip for multiple roles except for the following
-  # rules:
+  # Define all the fqdns and ip addresses for the cons3rt infrastructure 
+  # hosts. You may define the same fdqn and ip for multiple roles except 
+  # for the following rules:
   #   - The assetrepository cannot be on the same host as the webinterface.
   #   - The retina server must be defined on a windows host.
+  #
+  # aws        - complete all values
+  # openstack  - complete all values except private_ip
+  # kvm/vmware - complete fqdn and ip
   #
   ##########################################################################
   hosts:
     administration:
       fqdn:
       ip:
+      private_ip:
+      image_id:
+      instance_type:
     cons3rt:
       fqdn: 
       ip: 
+      private_ip:
+      image_type:
+      instance_type:
     database:
       fqdn: 
       ip: 
+      private_ip:
+      image_type:
+      instance_type:
     messaging:
       fqdn: 
-      ip: 
+      ip:
+      private_ip:
+      image_type:
+      instance_type:
     assetrepository:
       fqdn: 
-      ip: 
+      ip:
+      private_ip:
+      image_type:
+      instance_type:
     webinterface:
       fqdn: 
       ip:
+      private_ip:
+      image_type:
+      instance_type:
     remoteaccessgateway:
       fqdn:
       ip:
+      private_ip:
+      image_type:
+      instance_type:
     sourcebuilder:
       fqdn: 
       ip: 
+      private_ip:
+      image_type:
+      instance_type:
     testmanager:
       fqdn: 
       ip: 
+      private_ip:
+      image_type:
+      instance_type:
     retina:
       fqdn: 
-      ip: 
+      ip:
+      private_ip:
+      image_type:
+      instance_type: 
 
 # CONS3RT Packages
 # ----------------
