@@ -73,55 +73,55 @@ cons3rt-infrastructure:
       fqdn: 
       ip: 
       private_ip:
-      image_type:
+      image_id:
       instance_type:
     database:
       fqdn: 
       ip: 
       private_ip:
-      image_type:
+      image_id:
       instance_type:
     messaging:
       fqdn: 
       ip:
       private_ip:
-      image_type:
+      image_id:
       instance_type:
     assetrepository:
       fqdn: 
       ip:
       private_ip:
-      image_type:
+      image_id:
       instance_type:
     webinterface:
       fqdn: 
       ip:
       private_ip:
-      image_type:
+      image_id:
       instance_type:
     remoteaccessgateway:
       fqdn:
       ip:
       private_ip:
-      image_type:
+      image_id:
       instance_type:
     sourcebuilder:
       fqdn: 
       ip: 
       private_ip:
-      image_type:
+      image_id:
       instance_type:
     testmanager:
       fqdn: 
       ip: 
       private_ip:
-      image_type:
+      image_id:
       instance_type:
     retina:
       fqdn: 
       ip:
       private_ip:
-      image_type:
+      image_id:
       instance_type: 
 
 # CONS3RT Packages
